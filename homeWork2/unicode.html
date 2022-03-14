@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="unicode.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>UniCode</title>
+</head>
+<body>
+    <!-- Vize Final Hesabı-->
+    <navbar>
+        <button class="btnOne">UniCode</button>
+        <button class="btnTwo">Faktöriyel.js</button>
+        <button class="btnThree">Binom.js</button>
+        <button class="btnThree">VizeFinal.js</button>
+    </navbar>
+    
+    <h2 class="title">Vize Final Hesabı</h2>
+   
+        
+        <div class="theme" >
+            <fieldset style="border-radius: 20px;">
+                <legend> Öğrenci Not Girişi</legend>
+                <br>
+                <label for="isim">Ad Soyad:</label>
+                <input type="text" id="isim">
+                <br><br>
+                <label for="vize_1">Vize 1 :</label>
+                <input type="number" min="0" max="100" id="vize_1">
+                <input   style="float:right"type="range" id="vize_1_orani" min="0" max="100" step="20" >
+                <label  style="float:right"for="vize_1_orani">Vize 1 Oranı :</label>
+                <br><br>
+                <label for="vize_2">Vize 2 :</label>
+                <input type="number" min="0" max="100" id="vize_2">
+                <input   style="float:right"type="range" id="vize_2_orani"  min="0" max="100" step="20">
+                <label  style="float:right"for="vize_2_orani">Vize 2 Oranı :</label>
+                <br><br>
+                <label for="final">Final :</label>
+                <input type="number" min="0" max="100" id="final">
+                <input   style="float:right"type="range" id="final_orani"  min="0" max="100" step="20">
+                <label  style="float:right"for="final_orani">Final Oranı :</label>
+                <br><br>
+                <button class="btn" onclick="harfNotuHesapla()">Hesapla</button>
+               
+                
+            </fieldset>
+        </div>
+        <div class="theme" >
+            
+            <fieldset style="border-radius: 20px;">
+                <legend>Sonuçlar</legend>
+                
+               <p id="nihai_not">Öğrencinin Nihai Notu</p>
+               <p id="harf_notu">Öğrencinin Harf Notu</p>
+            </fieldset>
+        </div>
+
+        <br><br><br>
+
+        <!-- Faktöriyel Hesabı-->
+        
+        <h2 class="title">Faktöriyel Hesabı</h2>
+       
+            
+            <div class="theme" >
+                <table>
+                    <tr>
+                        <td>Lütfen Bir Sayı Giriniz:</td>
+                        <td><input type="text" id="sayiInput"/></td>
+                        <td><input type="button" value="Hesapla" onclick="Hesapla()"/></td>
+                    </tr>
+                    <tr>
+                        <td>Sonuç:</td>
+                        <td colspan="2"><span id="sonucSpan"></span></td>
+                    </tr>
+                </table>
+            </div>
+    
+     <!-- Script Faktöriyel Hesabı-->
+    <script>
+        function Hesapla(){
+           var sayi;
+           var sonuc=1;
+           sayi = document.getElementById("sayiInput").value;
+           for (let index = 1; index <= sayi; index++){
+               sonuc=sonuc*index;
+           } 
+           document.getElementById("sonucSpan").innerHTML=sonuc;
+        }
+    </script>        
+     <!-- Script Vize Final Hesabı-->
+    <script>
+        function nihaiNotHesaplama(vize_1,vize_2,final,vize_1_orani,vize_2_orani,final_orani){
+        return ((vize_1*vize_1_orani)+(vize_2*vize_2_orani)+(final*final_orani))/100;
+    }
+        function harfNotuHesapla()
+        {
+            let isim = document.getElementById("isim").value;
+            let vize_1 = document.getElementById("vize_1").value;
+            let vize_2 = document.getElementById("vize_2").value;
+            let final = document.getElementById("final").value;
+            let vize_1_orani = document.getElementById("vize_1_orani").value;
+            let vize_2_orani = document.getElementById("vize_2_orani").value;
+            let final_orani = document.getElementById("final_orani").value;
+
+            let nihai_not =nihaiNotHesaplama(vize_1,vize_2,final,vize_1_orani,vize_2_orani,final_orani);
+            document.getElementById("nihai_not").innerHTML = isim + "'in Nihai Notu: " + nihai_not;
+
+            let harf_notu;
+            if(nihai_not>=90)
+            harf_notu = "A" ;
+            else if (nihai_not>=75)
+            harf_notu = "B" ;
+            else if (nihai_not>=45)
+            harf_notu = "C" ;
+            else 
+            harf_notu = "F" ;
+
+            document.getElementById("harf_notu").innerHTML = isim + "'ın harf notu: " + harf_notu;
+        }
+
+    </script>
+    <script> 
+        function faktoriyelHesapla(p1) {
+            if(p1 == 1 || p1 ==0)
+                return 1;
+            else
+                return p1*faktoriyelHesapla((p1-1));
+        }
+        document.getElementById("demo").innerHTML = faktoriyelHesapla(3)
+    </script>
+  
+</body>
+</html>
